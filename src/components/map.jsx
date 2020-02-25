@@ -1,18 +1,9 @@
 import React, {Component} from 'react';
-import MapGL, {Marker, NavigationControl} from 'react-map-gl';
-import Pin from "./map/pin";
-import ControlPanel from './control-panel';
-
-import {FaMapPin} from 'react-icons/fa';
+import MapGL, {Popup} from 'react-map-gl';
 import R3Marker from "./map/r3special/r3Marker";
+import data from '../mockData';
+import Markers from "./map/markers";
 
-
-const navStyle = {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    padding: '10px'
-};
 export default class Map extends Component {
 
     constructor(props) {
@@ -27,21 +18,15 @@ export default class Map extends Component {
                 latitude: 53.331602,
                 longitude: -6.264853
             },
-            marker1: {
-                latitude: 53.3308172,
-                longitude: -6.264853
-            },
-            events: {}
+            data: data,
+            events: {},
+            popupInfo: null
         };
     }
 
-    _updateViewport = viewport => {
-        this.setState({viewport});
-    };
-
     render() {
 
-        const {r3Marker, marker1, viewport} = this.state;
+        const {r3Marker, data, viewport} = this.state;
 
         return (
             <MapGL
@@ -54,15 +39,43 @@ export default class Map extends Component {
 
                 <R3Marker r3Marker={r3Marker} onClick={this.handleR3Click}/>
 
+                <Markers data={data}/>
+
+                {this._renderPopup()}
+
             </MapGL>
         );
     }
 
+    _renderPopup() {
+        const {popupInfo} = this.state;
+
+        return (
+            popupInfo && (
+                <Popup
+                    tipSize={5}
+                    anchor="top"
+                    longitude={popupInfo.marker.longitude}
+                    latitude={popupInfo.marker.latitude}
+                    closeOnClick
+                    onClose={() => this.setState({popupInfo: null})}
+                >
+                    <div>
+                        <h4>{popupInfo.header}</h4>
+                        {popupInfo.body && <p>{popupInfo.body}</p>}
+                    </div>
+                </Popup>
+            )
+        );
+    }
+
     handleR3Click = () => {
-        console.log('r3 click');
+        const {r3Marker} = this.state;
+        this.setState({
+            popupInfo: {
+                header: 'Our lovely office <3',
+                marker: r3Marker
+            }
+        });
     };
-
-
 }
-
-//53.3313197,-6.265215

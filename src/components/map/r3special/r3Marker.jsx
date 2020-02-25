@@ -11,7 +11,7 @@ export default class R3Marker extends Component {
                 longitude={r3Marker.longitude}
                 latitude={r3Marker.latitude}
                 offsetTop={-50}
-                offsetLeft={-30}
+                offsetLeft={-25}
             >
                 <R3Pin onClick={onClick}/>
             </Marker>
