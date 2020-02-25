@@ -26,23 +26,23 @@ export default class Map extends Component {
 
     render() {
 
-        const {r3Marker, data, viewport} = this.state;
+        const {r3Marker, data} = this.state;
 
         return (
             <MapGL
                 {...this.state.viewport}
-                width="100vw"
+                width="100%"
                 height="45vh"
+                maxWidth={"100%"}
                 mapStyle="mapbox://styles/mapbox/dark-v9"
                 onViewportChange={viewport => this.setState({viewport})}
                 mapboxApiAccessToken={'pk.eyJ1IjoicG1jazkxIiwiYSI6ImNrNzJlNTQxOTAxYnUzZW1pc21rZHd5dnMifQ.Iu7Tz0M3bDRlHlQDN07Dvg'}>
 
                 <R3Marker r3Marker={r3Marker} onClick={this.handleR3Click}/>
 
-                <Markers data={data}/>
+                <Markers data={data} onClick={this.handleClick}/>
 
                 {this._renderPopup()}
-
             </MapGL>
         );
     }
@@ -55,18 +55,32 @@ export default class Map extends Component {
                 <Popup
                     tipSize={5}
                     anchor="top"
-                    longitude={popupInfo.marker.longitude}
-                    latitude={popupInfo.marker.latitude}
-                    closeOnClick
+                    longitude={popupInfo.longitude}
+                    latitude={popupInfo.latitude}
+                    closeOnClick={false}
                     onClose={() => this.setState({popupInfo: null})}
                 >
                     <div>
                         <h4>{popupInfo.header}</h4>
-                        {popupInfo.body && <p>{popupInfo.body}</p>}
+                        {popupInfo.link &&
+                        <a rel="noopener noreferrer" target={'_blank'} href={popupInfo.link}>website</a>}
+                        -
+                        <a rel="noopener noreferrer" target={'_blank'} href={`https://www.google.com/maps/dir//${popupInfo.header.split(' ').join('+')}`}>get directions</a>
                     </div>
                 </Popup>
             )
         );
+    }
+
+    handleClick = data => {
+        this.setState({
+            popupInfo: {
+                header: data.name,
+                link: data.url,
+                latitude: data.latitude,
+                longitude: data.longitude
+            }
+        });
     }
 
     handleR3Click = () => {
@@ -74,7 +88,8 @@ export default class Map extends Component {
         this.setState({
             popupInfo: {
                 header: 'Our lovely office <3',
-                marker: r3Marker
+                latitude: r3Marker.latitude,
+                longitude: r3Marker.longitude
             }
         });
     };

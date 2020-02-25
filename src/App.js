@@ -83,19 +83,19 @@ function App() {
                         <div className="col l3 s12">
                             <h5 className="white-text">Settings</h5>
                             <ul>
-                                <li><a className="white-text" href="#!">Link 1</a></li>
-                                <li><a className="white-text" href="#!">Link 2</a></li>
-                                <li><a className="white-text" href="#!">Link 3</a></li>
-                                <li><a className="white-text" href="#!">Link 4</a></li>
+                                <li><a className="white-text" href="/">Link 1</a></li>
+                                <li><a className="white-text" href="/">Link 2</a></li>
+                                <li><a className="white-text" href="/">Link 3</a></li>
+                                <li><a className="white-text" href="/">Link 4</a></li>
                             </ul>
                         </div>
                         <div className="col l3 s12">
                             <h5 className="white-text">Connect</h5>
                             <ul>
-                                <li><a className="white-text" href="#!">Link 1</a></li>
-                                <li><a className="white-text" href="#!">Link 2</a></li>
-                                <li><a className="white-text" href="#!">Link 3</a></li>
-                                <li><a className="white-text" href="#!">Link 4</a></li>
+                                <li><a className="white-text" href="/">Link 1</a></li>
+                                <li><a className="white-text" href="/">Link 2</a></li>
+                                <li><a className="white-text" href="/">Link 3</a></li>
+                                <li><a className="white-text" href="/">Link 4</a></li>
                             </ul>
                         </div>
                     </div>

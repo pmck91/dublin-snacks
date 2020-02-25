@@ -1,5 +1,6 @@
 export default [
     {
+        _id: 1,
         latitude: 53.3328184,
         longitude: -6.2656797,
         name: 'Brother Hubbard (South)',
@@ -24,6 +25,7 @@ export default [
         ]
     },
     {
+        _id: 2,
         latitude: 53.333764,
         longitude: -6.264593,
         name: 'Mad Egg',
