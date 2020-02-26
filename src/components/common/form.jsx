@@ -2,6 +2,9 @@ import React, {Component} from "react";
 import Joi from '@hapi/joi';
 import InputField from "./inputField";
 import CheckboxField from "./checkboxField";
+import RangeField from "./rangeField";
+import MultiSelectField from "./multiSelectField";
+
 // import SelectField from "./selectField";
 
 class Form extends Component {
@@ -47,7 +50,10 @@ class Form extends Component {
         } else delete errors[event.currentTarget.name];
 
         const data = {...this.state.data};
-        if (event.currentTarget.type === "checkbox") {
+        if(event.currentTarget.type === "select-multiple") {
+            const combinedData = Array.from(event.target.selectedOptions, option => option.value).join();
+            data[event.currentTarget.name] = combinedData;
+        } else if (event.currentTarget.type === "checkbox") {
             data[event.currentTarget.name] = !data[event.currentTarget.name];
         } else {
             data[event.currentTarget.name] = event.currentTarget.value;
@@ -55,7 +61,22 @@ class Form extends Component {
         this.setState({data, errors});
     };
 
-    renderInput = (name, label, type, autoFocus = false, prefix, width=6) => {
+    renderRange = (name, label, min, max, prefix, width = 6) => {
+        const {data} = this.state;
+        return (
+            <RangeField
+                name={name}
+                label={label}
+                value={data[name]}
+                width={width}
+                min={min}
+                max={max}
+                prefix={prefix}
+                onChange={this.handleChange}/>
+        );
+    };
+
+    renderInput = (name, label, type, autoFocus = false, prefix, width = 6) => {
         const {data, errors} = this.state;
         return (
             <InputField autoFocus={autoFocus}
@@ -66,27 +87,35 @@ class Form extends Component {
                         width={width}
                         error={errors[name]}
                         prefix={prefix}
+                        onFocus={this.validate}
                         onChange={this.handleChange}/>
         );
     };
 
-    // renderSelect = (name, label, options) => {
-    //     const {data, errors} = this.state;
-    //     return <SelectField name={name}
-    //                         value={data[name]}
-    //                         label={label}
-    //                         options={options}
-    //                         error={errors[name]}
-    //                         onChange={this.handleChange}/>
-    // };
+    renderMultiSelect = (name, label, placeholder, options, prefix, width) => {
+        const {data, errors} = this.state;
+        return <MultiSelectField
+                            prefix={prefix}
+                            name={name}
+                            value={data[name]}
+                            label={label}
+                            placeholder={placeholder}
+                            options={options}
+                            error={errors[name]}
+                            width={width}
+                            onChange={this.handleChange}/>
+    };
 
-    renderCheckbox = (name, label) => {
+    renderCheckbox = (name, label, labelClasses, classes, width) => {
         const {data, errors} = this.state;
         return (
             <CheckboxField name={name}
                            value={data[name]}
                            onChange={this.handleChange}
                            error={errors[name]}
+                           width={width}
+                           labelClasses={labelClasses}
+                           className={classes}
                            label={label}/>
         );
     };

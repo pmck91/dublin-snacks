@@ -1,23 +1,24 @@
 import React, {Component} from "react";
 
-class CheckboxField extends Component {
+export default class CheckboxField extends Component {
+
     render() {
-        const {value, name, label, error, ...rest} = this.props;
+        const {value, name, label, width, labelClasses, ...rest} = this.props;
 
         return (
-            <div className={"form-check form-group"}>
-                <input
-                    {...rest}
-                    checked={value}
-                    type={"checkbox"}
-                    id={name}
-                    name={name}
-                    className={"form-check-input"}/>
-                <label htmlFor={name} className={"form-check-label"}>{label ? label : name.capitalize()}</label>
-                {error && <div className="invalid-feedback">{error}</div>}
+
+            <div className={`input-field col ${width}`}>
+                <label className={labelClasses}>
+                    <input
+                        {...rest}
+                        checked={value}
+                        id={name}
+                        name={name}
+                        type="checkbox"/>
+
+                    <span>{label}</span>
+                </label>
             </div>
         );
     }
 }
-
-export default CheckboxField;

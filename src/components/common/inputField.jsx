@@ -5,7 +5,7 @@ export default class InputField extends Component {
         const {name, label, error, autoFocus, width, prefix, ...rest} = this.props;
 
         return (
-            <div className={`input-field col s${width}`}>
+            <div className={`input-field col ${width}`}>
                 {prefix && <i className="material-icons prefix">{prefix}</i>}
                 <input autoFocus={autoFocus ? autoFocus : false}
                        {...rest}

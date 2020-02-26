@@ -53,6 +53,34 @@
   outline: none;
 }
 
+.input-field .prefix ~ .range-field {
+  margin-left: 3rem;
+  width: 92%;
+  width: calc(100% - 3rem);
+  margin-top: 0px;
+}
+
+.checkbox-red[type="checkbox"]:checked + span:not(.lever):before {
+  border-bottom: 2px solid red;
+  border-right: 2px solid red;
+}
+
+.padding-left-checkbox {
+  padding-left: 25px;
+}
+
+.select-error {
+  color: #F44336 !important;
+}
+
+.slider-label {
+  margin-top: -30px;
+}
+
+.range-icon {
+  margin-top: -15px;
+}
+
 body {
   margin: 0;
 }
