@@ -18,11 +18,7 @@ export default [
         speed: 3,
         sitDown: true,
         takeAway: true,
-        ratings: [
-            2,
-            5,
-            4
-        ]
+        rating: 3.5
     },
     {
         _id: 2,
@@ -43,9 +39,6 @@ export default [
         speed: 3,
         sitDown: true,
         takeAway: false,
-        ratings: [
-            5,
-            4
-        ]
+        rating: 4.1
     },
 ]

@@ -13,8 +13,7 @@ export default class IconInfoBox extends Component {
                         className="material-icons">{icon}</i>
                     </h2>
                     <h5 className="center">{heading}</h5>
-                    <p className={"center"}>{content}</p>
-
+                    <div className={"center"}>{content}</div>
                 </div>
             </div>
         );
