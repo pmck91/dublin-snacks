@@ -10,9 +10,9 @@ export default class Map extends Component {
         super(props);
         this.state = {
             viewport: {
-                latitude: 53.3314443,
-                longitude: -6.2653022,
-                zoom: 14
+                latitude: 53.331602,
+                longitude: -6.264853,
+                zoom: 15
             },
             r3Marker: {
                 latitude: 53.331602,
@@ -26,7 +26,8 @@ export default class Map extends Component {
 
     render() {
 
-        const {r3Marker, data} = this.state;
+        const {r3Marker} = this.state;
+        const {data, onClick} = this.props;
 
         return (
             <MapGL
@@ -38,9 +39,9 @@ export default class Map extends Component {
                 onViewportChange={viewport => this.setState({viewport})}
                 mapboxApiAccessToken={'pk.eyJ1IjoicG1jazkxIiwiYSI6ImNrNzJlNTQxOTAxYnUzZW1pc21rZHd5dnMifQ.Iu7Tz0M3bDRlHlQDN07Dvg'}>
 
-                <R3Marker r3Marker={r3Marker} onClick={this.handleR3Click}/>
+                <R3Marker r3Marker={r3Marker} onMouseEnter={this.handleR3MouseEnter} onMouseExit={this.handleMouseExit}/>
 
-                <Markers data={data} onClick={this.handleClick}/>
+                <Markers data={data} onClick={onClick} onMouseEnter={this.handleMouseEnter} onMouseExit={this.handleMouseExit}/>
 
                 {this._renderPopup()}
             </MapGL>
@@ -53,44 +54,45 @@ export default class Map extends Component {
         return (
             popupInfo && (
                 <Popup
-                    tipSize={5}
                     anchor="top"
                     longitude={popupInfo.longitude}
                     latitude={popupInfo.latitude}
                     closeOnClick={false}
+                    closeButton={false}
                     onClose={() => this.setState({popupInfo: null})}
                 >
                     <div>
-                        <h4>{popupInfo.header}</h4>
-                        {popupInfo.link &&
-                        <a rel="noopener noreferrer" target={'_blank'} href={popupInfo.link}>website</a>}
-                        -
-                        <a rel="noopener noreferrer" target={'_blank'} href={`https://www.google.com/maps/dir//${popupInfo.header.split(' ').join('+')}`}>get directions</a>
+                        <p>{popupInfo.title}</p>
                     </div>
                 </Popup>
             )
         );
     }
 
-    handleClick = data => {
+    handleMouseEnter = data => {
         this.setState({
             popupInfo: {
-                header: data.name,
-                link: data.url,
+                title: data.name,
                 latitude: data.latitude,
                 longitude: data.longitude
             }
         });
-    }
+    };
 
-    handleR3Click = () => {
+    handleR3MouseEnter = () => {
         const {r3Marker} = this.state;
         this.setState({
             popupInfo: {
-                header: 'Our lovely office <3',
+                title: 'R3',
                 latitude: r3Marker.latitude,
                 longitude: r3Marker.longitude
             }
         });
     };
+
+    handleMouseExit = () => {
+        this.setState({
+            popupInfo: null
+        });
+    }
 }

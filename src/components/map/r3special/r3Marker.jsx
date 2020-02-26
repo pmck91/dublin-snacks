@@ -4,7 +4,7 @@ import R3Pin from "./r3Pin";
 
 export default class R3Marker extends Component {
     render() {
-        const {r3Marker, onClick} = this.props;
+        const {r3Marker, onMouseEnter, onMouseExit} = this.props;
 
         return (
             <Marker
@@ -13,7 +13,7 @@ export default class R3Marker extends Component {
                 offsetTop={-50}
                 offsetLeft={-25}
             >
-                <R3Pin onClick={onClick}/>
+                <R3Pin onMouseEnter={onMouseEnter} onMouseExit={onMouseExit}/>
             </Marker>
         );
     }

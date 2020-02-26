@@ -5,7 +5,7 @@ export default [
         longitude: -6.2656797,
         name: 'Brother Hubbard (South)',
         url: 'https://brotherhubbard.ie/',
-        cuisine: [
+        cuisines: [
             {
                 _id: '1',
                 name: 'Middle Eastern'
@@ -30,7 +30,7 @@ export default [
         longitude: -6.264593,
         name: 'Mad Egg',
         url: 'https://www.madegg.ie/',
-        cuisine: [
+        cuisines: [
             {
                 _id: '3',
                 name: 'Chicken'
@@ -39,10 +39,10 @@ export default [
                 name: 'Hipster'
             }
         ],
-        priceRange: 3,
+        priceRange: 5,
         speed: 3,
         sitDown: true,
-        takeAway: true,
+        takeAway: false,
         ratings: [
             5,
             4

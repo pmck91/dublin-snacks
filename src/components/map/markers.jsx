@@ -5,7 +5,7 @@ import Pin from "./pin";
 export default class Markers extends Component {
     render() {
 
-        const {data, onClick} = this.props;
+        const {data, onClick, onMouseEnter, onMouseExit} = this.props;
 
         return (
             <React.Fragment>
@@ -17,7 +17,7 @@ export default class Markers extends Component {
                             offsetTop={-30}
                             offsetLeft={-15}
                         >
-                            <Pin size={30} data={location} onClick={onClick}/>
+                            <Pin size={30} data={location} onClick={onClick} onMouseEnter={onMouseEnter} onMouseExit={onMouseExit}/>
                         </Marker>
                     </div>
                 )}
