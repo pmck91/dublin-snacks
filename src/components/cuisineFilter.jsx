@@ -18,26 +18,27 @@ export default class CuisineFilter extends Component {
     }
 
     render() {
-        const {options, selected, onSelect} = this.props;
+        const {options, selected, width, onSelect} = this.props;
         const selectedVal = selected ? selected._id : "";
 
         return (
-            <div className={"container"}>
-                <div className="input-field col s12">
-                    <select onChange={e => onSelect(e.target.value)}
-                            value={selectedVal}
-                            ref={(select) => {this.select = select}} >
-                        <option value="" disabled>Filter By Cuisine</option>
-                        <option value="-1">All</option>
-                        {options.map(option =>
-                            <option
-                                key={option._id}
-                                value={option._id}>
-                                {option.name}
-                            </option>
-                        )}
-                    </select>
-                </div>
+            <div className={`input-field col ${width}`}>
+                <select onChange={e => onSelect(e.target.value)}
+                        value={selectedVal}
+                        ref={(select) => {
+                            this.select = select
+                        }}>
+                    <option value="" disabled>Filter By Cuisine</option>
+                    <option value="-1">All</option>
+                    {options.map(option =>
+                        <option
+                            key={option._id}
+                            value={option._id}>
+                            {option.name}
+                        </option>
+                    )}
+                </select>
+
             </div>
         );
     }

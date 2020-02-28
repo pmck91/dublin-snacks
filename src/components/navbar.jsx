@@ -12,8 +12,8 @@ export default class NavBar extends Component {
     render() {
         return (
             <nav className="white lighten-1" role="navigation">
-                <div className="nav-wrapper container"><a id="logo-container valign-wrapper" href="/" className="brand-logo"><img
-                    src={logo} width={35} alt={"R3 logo"}/></a>
+                <div className="nav-wrapper container"><Link id="logo-container valign-wrapper" to="/" className="brand-logo"><img
+                    src={logo} width={35} alt={"R3 logo"}/></Link>
                     <ul className="right hide-on-med-and-down ">
                         <li><Link to="/add" className={"black-text"}>Add A Snack Dispensary</Link></li>
                     </ul>
